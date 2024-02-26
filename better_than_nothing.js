@@ -12,7 +12,7 @@ export const options = {
   scenarios: {
     constant_load: {
       executor: 'shared-iterations',
-      vus: 30, // Number of VUs to distribute the iterations
+      vus: 20, // Number of VUs to distribute the iterations
       iterations: 400, // Total number of iterations to be completed by all VUs
       maxDuration: '10m', // Maximum duration of the test
       options: {
@@ -35,7 +35,8 @@ export default async function () {
     await page.goto('https://14900k.gprocket.com');
 
     page.waitForSelector('li.product.type-product.post-27.status-publish.first.instock.product_cat-music.has-post-thumbnail.downloadable.virtual.purchasable.product-type-simple');
-    //page.screenshot({ path: 'screenshots/01_homepage.png' });
+
+    page.screenshot({ path: 'screenshots/01_homepage.png' });
 
     context.clearCookies()
 
@@ -49,9 +50,11 @@ export default async function () {
 
     page.waitForSelector('//*[@id="product-27"]/div[2]/form/button');
 
-    sleep(2);
+    sleep(3);
 
-    //page.screenshot({ path: 'screenshots/02_view-product.png' });
+    page.screenshot({ path: 'screenshots/02_view-product.png' });
+
+    sleep(1);
 
     // 03. Add item to cart
 
@@ -65,7 +68,7 @@ export default async function () {
 
     sleep(1);
 
-    //page.screenshot({ path: 'screenshots/03_product-added.png' });
+    page.screenshot({ path: 'screenshots/03_product-added.png' });
 
     // 04. View cart
 
@@ -76,11 +79,11 @@ export default async function () {
 
     sleep(1);
 
-    //page.waitForSelector('span.wc-block-components-button__text')
+    page.waitForSelector('span.wc-block-components-button__text')
 
-    //page.screenshot({ path: 'screenshots/04_view-cart.png' });
+    page.screenshot({ path: 'screenshots/04_view-cart.png' });
 
-    //sleep(2);
+    sleep(2);
 
     // 05. Billing details
 
@@ -95,7 +98,7 @@ export default async function () {
 
     //page.screenshot({ path: 'screenshots/05_billing-fields.png' });
 
-    sleep(1);
+    sleep(3);
 
     // 06. Enter customer data
 
@@ -115,31 +118,21 @@ export default async function () {
 
     page.locator("input[name='billing_first_name']").type(fields.billing_first_name);
 
-    sleep(1);
+    sleep(2);
 
     page.locator("input[name='billing_last_name']").type(fields.billing_last_name);
 
-    sleep(1);
+    sleep(2);
 
     page.locator("input[name='billing_address_1']").type(fields.billing_address_1);
 
-    sleep(1);
-
-    //page.locator("input[id='select2-billing_country-container']").type(fields.billing_country);
-
-    //const options = page.locator("span[id='select2-billing_country-container.select2-selection__rendered']");
-    //options.selectOption(fields.billing_country);
+    sleep(2);
 
     //sleep(3); SKIPPING COUNTRY DROP DOWN
 
     page.locator("input[name='billing_city']").type(fields.billing_city);
 
     sleep(1);
-
-    //page.locator("input[id='select2-billing_state-container']").type(fields.billing_state);
-
-    //const options2 = page.locator("span[id='select2-billing_state-container']");
-    //options.selectOption(fields.billing_state);
 
     //sleep(3); SKIPPING STATE DROPDOWN
 
@@ -153,9 +146,35 @@ export default async function () {
 
     page.locator("input[name='billing_email']").type(fields.billing_email);
 
-    sleep(1);
+    page.screenshot({ path: 'screenshots/05_billing-done-maybe.png' });
 
-    //page.screenshot({ path: 'screenshots/06_data-inputs.png' });
+    // Switch to the iframe for the credit card number field
+
+    // NOOOOOO page.locator("iframe#braintree-hosted-field-number.input[name='credit-card-number']").type("4111 1111 1111 1111");
+
+    sleep(2);
+
+    const iframeHandle = page.waitForSelector('//iframe');
+    const frame = iframeHandle.contentFrame();
+    const field1 = frame.waitForSelector("input[name='credit-card-number']");
+    await field1.type("4111 1111 1111 1111");
+
+    page.screenshot({ path: 'screenshots/06_cc-number-correct-maybe.png' });
+
+    sleep(2);
+
+    const iframeHandle2 = page.waitForSelector('iframe[id*="braintree-hosted-field-expirationDate"]');
+    const frame2 = iframeHandle2.contentFrame();
+    const field2 = frame2.waitForSelector("input[name='expiration']");
+    await field2.type("12/25");
+
+    sleep(2);
+
+    page.screenshot({ path: 'screenshots/07_cc-number-correct-maybe.png' });
+
+    sleep(2);
+
+    //page.screenshot({ path: 'screenshots/06_cc-exp-correct-maybe.png' });
 
 // 07. Click Checkout
 
@@ -163,13 +182,25 @@ export default async function () {
 
     await element7.click();
 
-    //page.screenshot({ path: 'screenshots/07_checking-out.png' });
+    page.screenshot({ path: 'screenshots/08_checking-out.png' });
 
-    //page.waitForSelector('p.woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received"')
+    sleep(1);
 
-    sleep(2);
+    page.screenshot({ path: 'screenshots/099_checked-out-maybe.png' });
 
-    //page.screenshot({ path: 'screenshots/08_order-complete.png' });
+    sleep(1);
+
+    page.screenshot({ path: 'screenshots/0999_checked-out-maybe.png' });
+
+    sleep(1);
+
+    page.screenshot({ path: 'screenshots/09_checked-out-maybe.png' });
+
+    sleep(1);
+
+    page.screenshot({ path: 'screenshots/10_order-complete.png' });
+
+    sleep(3);
 
   } finally {
     page.close();
