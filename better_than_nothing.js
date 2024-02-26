@@ -12,9 +12,9 @@ export const options = {
   scenarios: {
     constant_load: {
       executor: 'shared-iterations',
-      vus: 15, // Number of VUs to distribute the iterations
-      iterations: 250, // Total number of iterations to be completed by all VUs
-      maxDuration: '10m', // Maximum duration of the test
+      vus: 20, // Number of VUs to distribute the iterations
+      iterations: 500, // Total number of iterations to be completed by all VUs
+      maxDuration: '30m', // Maximum duration of the test
       options: {
         browser: {
           type: 'chromium',
@@ -53,7 +53,7 @@ export default async function () {
 
     //page.screenshot({ path: 'screenshots/02_view-product.png' });
 
-    sleep(1);
+    sleep(2);
 
     // 03. Add item to cart
 
@@ -65,7 +65,7 @@ export default async function () {
 
     //page.waitForSelector('div.wc-block-components-notice-banner.is-success')
 
-    sleep(2);
+    sleep(3);
 
     //page.screenshot({ path: 'screenshots/03_product-added.png' });
 
@@ -155,7 +155,7 @@ export default async function () {
 
     page.locator("input[name='billing_email']").type(fields.billing_email);
 
-    sleep(2);
+    sleep(3);
 
     //page.screenshot({ path: 'screenshots/06_data-inputs.png' });
 
@@ -169,7 +169,7 @@ export default async function () {
 
     //page.waitForSelector('p.woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received"')
 
-    sleep(2);
+    sleep(3);
 
     //page.screenshot({ path: 'screenshots/08_order-complete.png' });
 
