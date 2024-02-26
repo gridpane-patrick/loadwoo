@@ -12,8 +12,8 @@ export const options = {
   scenarios: {
     constant_load: {
       executor: 'shared-iterations',
-      vus: 30, // Number of VUs to distribute the iterations
-      iterations: 250, // Total number of iterations to be completed by all VUs
+      vus: 20, // Number of VUs to distribute the iterations
+      iterations: 500, // Total number of iterations to be completed by all VUs
       maxDuration: '10m', // Maximum duration of the test
       options: {
         browser: {
@@ -53,7 +53,7 @@ export default async function () {
 
     //page.screenshot({ path: 'screenshots/02_view-product.png' });
 
-    sleep(2);
+    sleep(1);
 
     // 03. Add item to cart
 
@@ -65,7 +65,7 @@ export default async function () {
 
     //page.waitForSelector('div.wc-block-components-notice-banner.is-success')
 
-    sleep(3);
+    sleep(1);
 
     //page.screenshot({ path: 'screenshots/03_product-added.png' });
 
@@ -76,13 +76,13 @@ export default async function () {
     //);
     await page.goto('https://14900k.gprocket.com/cart');
 
-    sleep(3);
+    sleep(2);
 
-    page.waitForSelector('span.wc-block-components-button__text')
+    //page.waitForSelector('span.wc-block-components-button__text')
 
     //page.screenshot({ path: 'screenshots/04_view-cart.png' });
 
-    sleep(2);
+    //sleep(2);
 
     // 05. Billing details
 
@@ -155,7 +155,7 @@ export default async function () {
 
     page.locator("input[name='billing_email']").type(fields.billing_email);
 
-    sleep(3);
+    sleep(2);
 
     //page.screenshot({ path: 'screenshots/06_data-inputs.png' });
 
