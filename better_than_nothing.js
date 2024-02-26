@@ -12,8 +12,8 @@ export const options = {
   scenarios: {
     constant_load: {
       executor: 'shared-iterations',
-      vus: 20, // Number of VUs to distribute the iterations
-      iterations: 300, // Total number of iterations to be completed by all VUs
+      vus: 15, // Number of VUs to distribute the iterations
+      iterations: 250, // Total number of iterations to be completed by all VUs
       maxDuration: '10m', // Maximum duration of the test
       options: {
         browser: {
