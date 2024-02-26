@@ -49,11 +49,9 @@ export default async function () {
 
     page.waitForSelector('//*[@id="product-27"]/div[2]/form/button');
 
-    sleep(3);
+    sleep(2);
 
     //page.screenshot({ path: 'screenshots/02_view-product.png' });
-
-    sleep(1);
 
     // 03. Add item to cart
 
@@ -76,7 +74,7 @@ export default async function () {
     //);
     await page.goto('https://14900k.gprocket.com/cart');
 
-    sleep(2);
+    sleep(1);
 
     //page.waitForSelector('span.wc-block-components-button__text')
 
@@ -97,7 +95,7 @@ export default async function () {
 
     //page.screenshot({ path: 'screenshots/05_billing-fields.png' });
 
-    sleep(3);
+    sleep(1);
 
     // 06. Enter customer data
 
@@ -117,15 +115,15 @@ export default async function () {
 
     page.locator("input[name='billing_first_name']").type(fields.billing_first_name);
 
-    sleep(2);
+    sleep(1);
 
     page.locator("input[name='billing_last_name']").type(fields.billing_last_name);
 
-    sleep(2);
+    sleep(1);
 
     page.locator("input[name='billing_address_1']").type(fields.billing_address_1);
 
-    sleep(2);
+    sleep(1);
 
     //page.locator("input[id='select2-billing_country-container']").type(fields.billing_country);
 
@@ -136,7 +134,7 @@ export default async function () {
 
     page.locator("input[name='billing_city']").type(fields.billing_city);
 
-    sleep(2);
+    sleep(1);
 
     //page.locator("input[id='select2-billing_state-container']").type(fields.billing_state);
 
@@ -147,15 +145,15 @@ export default async function () {
 
     page.locator("input[name='billing_postcode']").type(fields.billing_postcode);
 
-    sleep(2);
+    sleep(1);
 
     page.locator("input[name='billing_phone']").type(fields.billing_phone);
 
-    sleep(2);
+    sleep(1);
 
     page.locator("input[name='billing_email']").type(fields.billing_email);
 
-    sleep(2);
+    sleep(1);
 
     //page.screenshot({ path: 'screenshots/06_data-inputs.png' });
 
@@ -169,7 +167,7 @@ export default async function () {
 
     //page.waitForSelector('p.woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received"')
 
-    sleep(3);
+    sleep(2);
 
     //page.screenshot({ path: 'screenshots/08_order-complete.png' });
 
