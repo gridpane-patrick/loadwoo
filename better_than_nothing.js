@@ -12,9 +12,9 @@ export const options = {
   scenarios: {
     constant_load: {
       executor: 'shared-iterations',
-      vus: 20, // Number of VUs to distribute the iterations
-      iterations: 500, // Total number of iterations to be completed by all VUs
-      maxDuration: '30m', // Maximum duration of the test
+      vus: 30, // Number of VUs to distribute the iterations
+      iterations: 250, // Total number of iterations to be completed by all VUs
+      maxDuration: '10m', // Maximum duration of the test
       options: {
         browser: {
           type: 'chromium',
@@ -74,7 +74,7 @@ export default async function () {
     //const element4 = page.locator(
       //'a.button.wc-forward'
     //);
-    await page.goto('https://gprocket.com/cart');
+    await page.goto('https://14900k.gprocket.com/cart');
 
     sleep(3);
 
