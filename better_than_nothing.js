@@ -72,7 +72,7 @@ export default async function () {
     //const element4 = page.locator(
       //'a.button.wc-forward'
     //);
-    await page.goto('https://14900k.gprocket.com/cart');
+    await page.goto('https://14900k.gprocket.com/cart/');
 
     sleep(1);
 
