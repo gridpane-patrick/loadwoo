@@ -3,8 +3,6 @@ import { sleep } from 'k6';
 import faker from 'https://cdn.jsdelivr.net/npm/faker@5.5.3/dist/faker.min.js'
 import { Counter } from 'k6/metrics';
 
-// THIS IS ACTUALLY WORKING DON'T FUCK IT UP!!!
-
 // Counter for completed transactions
 //let completedTransactions = new Counter('completed_transactions');
 
@@ -154,7 +152,12 @@ export default async function () {
 
     sleep(2);
 
-    const iframeHandle = page.waitForSelector('//iframe');
+    // Define the place order element BEFORE switching contexts to the iframes
+    const element7 = page.locator('button[name*="woocommerce_checkout_place_order"]');
+
+    sleep(1);
+
+    const iframeHandle = page.waitForSelector('iframe[id*="braintree-hosted-field-number"]');
     const frame = iframeHandle.contentFrame();
     const field1 = frame.waitForSelector("input[name='credit-card-number']");
     await field1.type("4111 1111 1111 1111");
@@ -172,25 +175,43 @@ export default async function () {
 
     page.screenshot({ path: 'screenshots/07_cc-number-correct-maybe.png' });
 
-    sleep(2);
-
-    //page.screenshot({ path: 'screenshots/06_cc-exp-correct-maybe.png' });
+    sleep(3);
 
 // 07. Click Checkout
-
-    const element7 = page.locator('button#place_order.button.alt');
 
     await element7.click();
 
     page.screenshot({ path: 'screenshots/08_checking-out.png' });
 
-    sleep(1);
+    sleep(3);
+
+    // Try this...
+
+    // Press Tab twice
+    //await page.keyboard.press('Tab');
+
+    //sleep(1);
+
+    //page.screenshot({ path: 'screenshots/TAB_test1.png' });
+
+    //await page.keyboard.press('Tab');
+
+    //sleep(1);
+
+    //page.screenshot({ path: 'screenshots/TAB_test1.png' });
+
+    // Press Enter
+    //await page.keyboard.press('Enter');
 
     page.screenshot({ path: 'screenshots/09_checked-out-maybe.png' });
 
     sleep(1);
 
-    page.screenshot({ path: 'screenshots/10_order-complete.png' });
+    await page.waitForSelector('div.woocommerce-order')
+
+    sleep(3);
+
+    page.screenshot({ path: 'screenshots/10_order-complete-maybe.png' });
 
     sleep(3);
 
