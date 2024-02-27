@@ -186,14 +186,6 @@ export default async function () {
 
     sleep(1);
 
-    page.screenshot({ path: 'screenshots/099_checked-out-maybe.png' });
-
-    sleep(1);
-
-    page.screenshot({ path: 'screenshots/0999_checked-out-maybe.png' });
-
-    sleep(1);
-
     page.screenshot({ path: 'screenshots/09_checked-out-maybe.png' });
 
     sleep(1);
